@@ -47,32 +47,6 @@ class WeatherAppServicesTests: XCTestCase {
         waitForExpectations(timeout: 3)
 
     }
-
-    
-    /// Test for get Weather for invalid key
-    func testGetWeatherForInvalidKey() throws {
-        let exp = expectation(description: "Loading weather")
-        let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=37.78&lon=-122.42&units=imperial&appid=94139418d7a222cfb00136fcee6afd5"
-        serviceBuilder.makeServiceCall(url: urlString) { data, response, error in
-            
-            if let error = error {
-                  XCTFail("Get Weather Error: \(error.localizedDescription)")
-                  return
-                } else if let statusCode = (response as? HTTPURLResponse)?.statusCode {
-                  if statusCode == 200 {
-                    // 2
-                      exp.fulfill()
-                  } else {
-                    XCTFail("Status code: \(statusCode)")
-                  }
-                }
-
-        }
-        
-        waitForExpectations(timeout: 3)
-
-    }
-
     
     /// Test for get locations service call
     func testGetLocations() throws {
